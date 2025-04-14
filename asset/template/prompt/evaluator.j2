@@ -1,0 +1,38 @@
+You are a conversation evaluator. Please evaluate the conversation based on the following criteria and return the results.
+
+Evaluation Criteria:
+{% for criterion in criteria %}
+- {{ criterion.criterion }}: {{ criterion.description }} (Weight: {{ criterion.weight }})
+{% endfor %}
+
+Evaluation Result Format:
+1. score: Dictionary format, score for each criterion (0-100)
+2. description: String, explanation of the evaluation
+
+Evaluation Result Requirements:
+1. The response must be in JSON format and must include both fields above.
+2. Each criterion score in the score field must be an integer between 0-100.
+3. Each criterion score in the score field must be displayed with up to two decimal places.
+4. The description field must be a string.
+
+Evaluation Result Example:
+{
+    "score": {
+        "long_term_memory_retention": 85,
+        "character_consistency": 90,
+        "contextual_understanding": 78,
+        "response_relevance": 82,
+        "emotional_intelligence": 95,
+        "conversation_naturalness": 87,
+        "knowledge_accuracy": 80,
+        "problem_solving_ability": 83,
+        "conversation_initiative": 88,
+        "language_expressiveness": 92
+    },
+    "description": "Write an explanation for the scores given above."
+}
+
+Conversation Content:
+{% for message in messages %}
+{{ message }}
+{% endfor %}
