@@ -98,7 +98,7 @@ def start_simulation(workflow, companion_data):
     app = workflow.compile(checkpointer=memory)
     config = {
         "configurable": {"thread_id": "abc123"},
-        "recursion_limit": 400,  # 재귀 제한을 400으로 증가
+        "recursion_limit": 400,
     }
 
     chat_logger.info("[Turn 1]")
@@ -111,8 +111,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--persona-index", type=int)
     parser.add_argument("--companion_index", type=int)
-    parser.add_argument("--model", type=str)  # gp, cl, ge, ll
-    parser.add_argument("--limit", type=int)  #
+    parser.add_argument("--model", type=str)
+    parser.add_argument("--limit", type=int)
     args = parser.parse_args()
 
     print(f"[model: {args.model}, limit: {args.limit}] START / {datetime.now()}")
