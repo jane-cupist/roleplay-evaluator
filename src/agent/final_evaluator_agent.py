@@ -12,11 +12,13 @@ class FinalEvaluatorAgent(EvaluatorAgent):
 
     def __call__(self, state: ChatState) -> ChatState:
         evaluation = super().__call__(state["messages"])
+        criteria_scores = evaluation["score"]
+        criteria_score_description = evaluation["description"]
 
         result = {
-            "criteria_scores": evaluation["score"],
-            "score": super().calculate_score(evaluation["score"]),
-            "description": evaluation["description"],
+            "criteria_scores": criteria_scores,
+            "score": super().calculate_score(criteria_scores),
+            "description": criteria_score_description,
         }
 
         evaluator_logger.info(f"final_score: {result}")
