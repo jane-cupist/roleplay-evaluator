@@ -1,5 +1,3 @@
-from typing import List
-
 from langchain_core.language_models import BaseChatModel
 
 from agent.evaluator_agent import EvaluatorAgent
@@ -19,10 +17,8 @@ class FinalEvaluatorAgent(EvaluatorAgent):
         criteria_scores = evaluation["score"]
         criteria_score_description = evaluation["description"]
 
-        state["evaluation_result"]["total_score"] = {
-            "criteria_scores": criteria_scores,
-            "score": super().calculate_score(criteria_scores),
-            "description": criteria_score_description,
-        }
-
-        return state
+        print("======== Final Evaluator Agent ========")
+        print(f"criteria_scores: {criteria_scores}")
+        print(f"score: {super().calculate_score(criteria_scores)}")
+        print(f"criteria_score_description: {criteria_score_description}")
+        print("=====================================")

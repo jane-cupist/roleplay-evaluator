@@ -1,15 +1,8 @@
-import json
-from typing import List
-
 from langchain_core.language_models import BaseChatModel
-from langchain_core.messages import BaseMessage
-from langchain_core.prompts import ChatPromptTemplate
 
 from agent.evaluator_agent import EvaluatorAgent
 from interface.chat_state import ChatState
 from interface.evaluation_criteria import EvaluationCriteria
-from interface.evaluation_result import EvaluationResult
-from prompt.prompt_template import PromptTemplate
 
 
 class TurnEvaluatorAgent(EvaluatorAgent):
@@ -31,14 +24,9 @@ class TurnEvaluatorAgent(EvaluatorAgent):
             "description": criteria_score_description,
         }
 
-        state["evaluation_result"] = state.get(
-            "evaluation_result",
-            {
-                "turn_scores": [],
-                "total_score": {},
-            },
-        )
-
-        state["evaluation_result"]["turn_scores"].append(turn_score)
-
-        return state
+        print("======== Turn Evaluator Agent ========")
+        print(f"criteria_scores: {criteria_scores}")
+        print(f"score: {super().calculate_score(criteria_scores)}")
+        print(f"criteria_score_description: {criteria_score_description}")
+        print(f"turn_score: {turn_score}")
+        print("=====================================")

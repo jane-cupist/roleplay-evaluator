@@ -10,7 +10,6 @@ from interface.evaluation_result import EvaluationResult
 class ChatState(TypedDict):
     messages: Annotated[List[BaseMessage], add_messages]
     decision: str
-    evaluation_criterias: List[EvaluationCriteria]
     evaluation_result: EvaluationResult
     model: str
     turn_limit: int
