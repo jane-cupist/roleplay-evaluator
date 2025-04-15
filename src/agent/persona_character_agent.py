@@ -17,10 +17,13 @@ class PersonaAgent(Agent):
     @retry_with_exponential_backoff(max_retries=5, initial_delay=1.0, max_delay=10.0)
     def __call__(self, state: ChatState) -> ChatState:
         messages = state["messages"]
-        last_message = messages[-1].content if messages else ""
+        last_message = messages[-1]
 
-        response = (PersonaAgent.make_prompt(self.character) | self.model).invoke(
-            {"messages": messages, "input": last_message},
+        prompt = PersonaAgent.make_prompt(self.character)
+        chain = prompt | self.model
+
+        response = chain.invoke(
+            {"messages": messages[:-1], "input": last_message},
             {"timeout": 60000},
         )
 
