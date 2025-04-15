@@ -32,8 +32,7 @@ class PersonaAgent(Agent):
 
         chat_logger.info(f"persona: {response.content}")
 
-        state["messages"] = messages + [HumanMessage(content=response.content)]
-        return state
+        return {"messages": [HumanMessage(content=response.content)]}
 
     @staticmethod
     def make_prompt(character: PersonaCharacter) -> ChatPromptTemplate:

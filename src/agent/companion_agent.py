@@ -33,8 +33,7 @@ class CompanionAgent(Agent):
         chat_logger.info(f"[Turn {len(messages) // 2 + 1}]")
         chat_logger.info(f"companion: {response.content}")
 
-        state["messages"] = messages + [AIMessage(content=response.content)]
-        return state
+        return {"messages": [AIMessage(content=response.content)]}
 
     @staticmethod
     def make_prompt(character: CompanionCharacter) -> ChatPromptTemplate:
