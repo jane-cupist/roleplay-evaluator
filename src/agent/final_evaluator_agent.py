@@ -11,9 +11,7 @@ class FinalEvaluatorAgent(EvaluatorAgent):
         super().__init__(model, criteria)
 
     def __call__(self, state: ChatState) -> ChatState:
-        messages = state["messages"]
-
-        evaluation = super().__call__(messages)
+        evaluation = super().__call__(state["messages"])
 
         result = {
             "criteria_scores": evaluation["score"],

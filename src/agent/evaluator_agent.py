@@ -51,7 +51,11 @@ class EvaluatorAgent(Agent):
         }
 
     def make_prompt(self, messages: List[BaseMessage]) -> ChatPromptTemplate:
-        message_contents = [msg.content for msg in messages]
+        # TODO: 수정
+        name = "이진호" if messages[0].type == "ai" else "서하은"
+
+        message_contents = [f"{name}: {msg.content}" for msg in messages]
+
         return PromptTemplate().render_evaluator_prompt(message_contents, self.criteria)
 
     def calculate_score(self, evaluation_result: EvaluationResult) -> float:

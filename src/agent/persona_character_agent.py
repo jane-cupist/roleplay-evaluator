@@ -6,6 +6,7 @@ from interface.agent import Agent
 from interface.character import PersonaCharacter
 from interface.chat_state import ChatState
 from prompt.prompt_template import PromptTemplate
+from utils.logger import chat_logger
 from utils.retry_utils import retry_with_exponential_backoff
 
 
@@ -23,9 +24,11 @@ class PersonaAgent(Agent):
         chain = prompt | self.model
 
         response = chain.invoke(
-            {"messages": messages[:-1], "input": last_message},
-            {"timeout": 60000},
+            input={"messages": messages[:-1], "input": last_message},
+            config={"timeout": 60000},
         )
+
+        chat_logger.info(f"persona: {response.content}")
 
         state["messages"] = messages + [HumanMessage(content=response.content)]
         return state

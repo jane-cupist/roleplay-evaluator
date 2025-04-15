@@ -38,3 +38,7 @@ def setup_logger(name: str, log_file: str = None) -> logging.Logger:
 evaluator_logger = setup_logger(
     "evaluator", f'logs/evaluator_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
 )
+
+chat_logger = setup_logger(
+    "chat", f'logs/chat_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
+)

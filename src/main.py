@@ -13,6 +13,7 @@ from agent.persona_character_agent import PersonaAgent
 from agent.turn_evaluator_agent import TurnEvaluatorAgent
 from factory.model_factory import ModelFactory
 from interface.chat_state import ChatState
+from utils.logger import chat_logger
 
 
 def initialize_agents(model_name: str):
@@ -123,6 +124,8 @@ def start_simulation(workflow, companion_data):
         "timeout": 60000,
     }
 
+    chat_logger.info("[Turn 1]")
+    chat_logger.info(f"companion: {companion_data['initial_message']}")
     query = companion_data["initial_message"]
     app.invoke({"messages": [AIMessage(content=query)]}, config)
 
