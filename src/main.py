@@ -9,7 +9,7 @@ from toolz import pipe
 
 from agent.companion_agent import CompanionAgent
 from agent.final_evaluator_agent import FinalEvaluatorAgent
-from agent.persona_character_agent import PersonaAgent
+from agent.persona_agent import PersonaAgent
 from agent.turn_evaluator_agent import TurnEvaluatorAgent
 from factory.model_factory import ModelFactory
 from interface.chat_state import ChatState
