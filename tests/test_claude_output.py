@@ -26,4 +26,4 @@ structured_llm = llm.with_structured_output(Joke)
 res = structured_llm.invoke("Tell me a joke about cats")
 print(res)
 
-print(res["setup"])
+print(res.setup)

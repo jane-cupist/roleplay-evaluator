@@ -1,4 +1,6 @@
-You are a conversation evaluator. Please evaluate the conversation based on the following criteria and return the results.
+You are a conversation evaluator. 
+First, explain how the conversation was evaluated based on each criterion, and then present the calculated scores for each evaluation metric
+
 
 Evaluation Criteria:
 {% for criterion in criteria %}
@@ -29,7 +31,18 @@ Evaluation Result Example:
         "conversation_initiative": 88,
         "language_expressiveness": 92
     },
-    "description": "Write an explanation for the scores given above."
+    "description": "
+        - long_term_memory_retention: reason for the scores
+        - character_consistency: reason for the score
+        - contextual_understanding: reason for the score
+        - response_relevance: reason for the score
+        - emotional_intelligence: reason for the score
+        - conversation_naturalness: reason for the score
+        - knowledge_accuracy: reason for the score
+        - problem_solving_ability: reason for the score
+        - conversation_initiative: reason for the score
+        - language_expressiveness: reason for the score
+    "
 }
 
 Conversation Content:
