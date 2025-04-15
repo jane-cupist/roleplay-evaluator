@@ -38,11 +38,10 @@ class EvaluatorAgent(Agent):
         self.criteria = criteria
 
     @retry_with_exponential_backoff(max_retries=5, initial_delay=1.0, max_delay=10.0)
-    def __call__(self, state: ChatState, messages: List[BaseMessage]) -> ChatState:
-        messages = state["messages"]
+    def __call__(self, messages: List[BaseMessage]) -> dict:
 
         result = self.model.with_structured_output(EvaluatorOutput).invoke(
-            self.make_prompt(messages[-2:]),
+            self.make_prompt(messages),
             {"timeout": 60000},
         )
 
@@ -52,7 +51,8 @@ class EvaluatorAgent(Agent):
         }
 
     def make_prompt(self, messages: List[BaseMessage]) -> ChatPromptTemplate:
-        return PromptTemplate().render_evaluator_prompt(messages, self.criteria)
+        message_contents = [msg.content for msg in messages]
+        return PromptTemplate().render_evaluator_prompt(message_contents, self.criteria)
 
     def calculate_score(self, evaluation_result: EvaluationResult) -> float:
         total_score = 0

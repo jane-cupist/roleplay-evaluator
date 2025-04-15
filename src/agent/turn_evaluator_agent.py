@@ -13,7 +13,7 @@ class TurnEvaluatorAgent(EvaluatorAgent):
     def __call__(self, state: ChatState) -> ChatState:
         messages = state["messages"]
 
-        evaluation = super().__call__(state, messages[-2:])
+        evaluation = super().__call__(messages[-2:])
 
         criteria_scores = evaluation["score"]
         criteria_score_description = evaluation["description"]
