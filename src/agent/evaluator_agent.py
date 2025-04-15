@@ -39,10 +39,9 @@ class EvaluatorAgent(Agent):
 
     @retry_with_exponential_backoff(max_retries=5, initial_delay=1.0, max_delay=10.0)
     def __call__(self, messages: List[BaseMessage]) -> dict:
-
         result = self.model.with_structured_output(EvaluatorOutput).invoke(
-            self.make_prompt(messages),
-            {"timeout": 60000},
+            input=self.make_prompt(messages),
+            config={"timeout": 60000},
         )
 
         return {
@@ -50,11 +49,18 @@ class EvaluatorAgent(Agent):
             "description": result.description,
         }
 
-    def make_prompt(self, messages: List[BaseMessage]) -> ChatPromptTemplate:
-        # TODO: 수정
-        name = "이진호" if messages[0].type == "ai" else "서하은"
+    # TODO: 수정
+    def get_character_name(self, message: BaseMessage) -> str:
+        if message.type == "ai":
+            return "이진호"
+        else:
+            return "서하은"
 
-        message_contents = [f"{name}: {msg.content}" for msg in messages]
+    def make_prompt(self, messages: List[BaseMessage]) -> ChatPromptTemplate:
+
+        message_contents = [
+            f"{self.get_character_name(msg)}: {msg.content}" for msg in messages
+        ]
 
         return PromptTemplate().render_evaluator_prompt(message_contents, self.criteria)
 

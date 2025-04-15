@@ -23,8 +23,10 @@ class PersonaAgent(Agent):
         prompt = PersonaAgent.make_prompt(self.character)
         chain = prompt | self.model
 
+        message_contents = [f"{msg.content}" for msg in messages[:-1]]
+
         response = chain.invoke(
-            input={"messages": messages[:-1], "input": last_message},
+            input={"messages": message_contents, "input": last_message.content},
             config={"timeout": 60000},
         )
 
