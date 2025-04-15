@@ -52,21 +52,7 @@ def router(state: ChatState, turn_limit: int) -> str:
     return "companion"
 
 
-def set_model_name(state: ChatState, model_name: str) -> ChatState:
-    state["model"] = model_name
-
-    return state
-
-
-def set_turn_limit(state: ChatState, turn_limit: int) -> ChatState:
-    state["turn_limit"] = turn_limit
-
-    return state
-
-
 def add_nodes_to_graph(
-    model_name: str,
-    turn_limit: int,
     companion_model,
     persona_model,
     evaluator_model,
@@ -88,12 +74,6 @@ def add_nodes_to_graph(
     workflow.add_node("persona", persona_node)
     workflow.add_node("evaluator", evaluator_node)
     workflow.add_node("final_evaluator", final_evaluator_node)
-    workflow.add_node(
-        "set_model_name", lambda state: set_model_name(state, model_name)
-    )  # 모델 이름 설정
-    workflow.add_node(
-        "set_turn_limit", lambda state: set_turn_limit(state, turn_limit)
-    )  # 턴 제한 설정
 
     return workflow
 
@@ -108,9 +88,7 @@ def add_edges_to_graph(workflow, turn_limit: int):
         lambda state: router(state, turn_limit),
         {"companion": "companion", "final_evaluator": "final_evaluator"},
     )
-    workflow.add_edge("final_evaluator", "set_model_name")
-    workflow.add_edge("set_model_name", "set_turn_limit")
-    workflow.add_edge("set_turn_limit", END)
+    workflow.add_edge("final_evaluator", END)
 
     return workflow
 
@@ -121,7 +99,6 @@ def start_simulation(workflow, companion_data):
     config = {
         "configurable": {"thread_id": "abc123"},
         "recursion_limit": 400,  # 재귀 제한을 400으로 증가
-        "timeout": 60000,
     }
 
     chat_logger.info("[Turn 1]")
@@ -151,9 +128,7 @@ if __name__ == "__main__":
 
     pipe(
         initialize_agents(args.model),
-        lambda models: add_nodes_to_graph(
-            args.model, turn_limit, *models, persona_data, companion_data
-        ),
+        lambda models: add_nodes_to_graph(*models, persona_data, companion_data),
         lambda workflow: add_edges_to_graph(workflow, turn_limit),
         lambda workflow: start_simulation(workflow, companion_data),
     )
