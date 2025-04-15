@@ -3,6 +3,7 @@ from langchain_core.language_models import BaseChatModel
 from agent.evaluator_agent import EvaluatorAgent
 from interface.chat_state import ChatState
 from interface.evaluation_criteria import EvaluationCriteria
+from utils.logger import evaluator_logger
 
 
 class FinalEvaluatorAgent(EvaluatorAgent):
@@ -14,11 +15,10 @@ class FinalEvaluatorAgent(EvaluatorAgent):
 
         evaluation = super().__call__(state, messages)
 
-        criteria_scores = evaluation["score"]
-        criteria_score_description = evaluation["description"]
+        result = {
+            "criteria_scores": evaluation["score"],
+            "score": super().calculate_score(evaluation["score"]),
+            "description": evaluation["description"],
+        }
 
-        print("======== Final Evaluator Agent ========")
-        print(f"criteria_scores: {criteria_scores}")
-        print(f"score: {super().calculate_score(criteria_scores)}")
-        print(f"criteria_score_description: {criteria_score_description}")
-        print("=====================================")
+        evaluator_logger.info(f"final_score: {result}")
