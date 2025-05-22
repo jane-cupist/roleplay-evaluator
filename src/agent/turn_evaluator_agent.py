@@ -7,8 +7,14 @@ from utils.logger import evaluator_logger
 
 
 class TurnEvaluatorAgent(EvaluatorAgent):
-    def __init__(self, model: BaseChatModel, criteria: EvaluationCriteria):
-        super().__init__(model, criteria)
+    def __init__(
+        self,
+        model: BaseChatModel,
+        criteria: EvaluationCriteria,
+        persona_name: str,
+        character_name: str,
+    ):
+        super().__init__(model, criteria, persona_name, character_name)
 
     def __call__(self, state: ChatState) -> ChatState:
         messages = state["messages"]

@@ -60,13 +60,23 @@ def add_nodes_to_graph(
     persona_data,
     companion_data,
 ):
-    companion_node = CompanionAgent(model=companion_model, character=companion_data)
-    persona_node = PersonaAgent(model=persona_model, character=persona_data)
+    companion_node = CompanionAgent(
+        model=companion_model, character=companion_data, persona=persona_data
+    )
+    persona_node = PersonaAgent(
+        model=persona_model, character=companion_data, persona=persona_data
+    )
     evaluator_node = TurnEvaluatorAgent(
-        model=evaluator_model, criteria=persona_data["evaluation_criterias"]
+        model=evaluator_model,
+        criteria=persona_data["evaluation_criterias"],
+        persona_name=persona_data["name"],
+        character_name=companion_data["name"],
     )
     final_evaluator_node = FinalEvaluatorAgent(
-        model=final_evaluator_model, criteria=persona_data["evaluation_criterias"]
+        model=final_evaluator_model,
+        criteria=persona_data["evaluation_criterias"],
+        persona_name=persona_data["name"],
+        character_name=companion_data["name"],
     )
 
     workflow = StateGraph(ChatState)

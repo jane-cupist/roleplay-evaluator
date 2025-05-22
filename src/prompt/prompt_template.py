@@ -1,26 +1,21 @@
+from abc import ABC, abstractmethod
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from interface.character import Character
-from interface.evaluation_criteria import EvaluationCriteria
+
+class PromptParam(ABC):
+    pass
 
 
-class PromptTemplate:
-    def __init__(self):
+class PromptTemplate(ABC):
+    def __init__(self, template_name: str):
         template_dir = Path("asset/template/prompt")
         self.env = Environment(
             loader=FileSystemLoader(template_dir), trim_blocks=True, lstrip_blocks=True
         )
+        self.template = self.env.get_template(template_name)
 
-    def render_character_prompt(self, character: Character) -> str:
-        template = self.env.get_template("character.j2")
-        return template.render(
-            character=character,
-        )
-
-    def render_evaluator_prompt(
-        self, messages: list, criteria: EvaluationCriteria
-    ) -> str:
-        template = self.env.get_template("evaluator.j2")
-        return template.render(messages=messages, criteria=criteria)
+    @abstractmethod
+    def render(self, params: PromptParam) -> str:
+        pass

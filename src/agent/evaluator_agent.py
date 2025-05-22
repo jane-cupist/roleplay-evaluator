@@ -6,10 +6,12 @@ from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 
 from interface.agent import Agent
-from interface.chat_state import ChatState
 from interface.evaluation_criteria import EvaluationCriteria
 from interface.evaluation_result import EvaluationResult
-from prompt.prompt_template import PromptTemplate
+from prompt.evaluator_prompt_template import (
+    EvaluatorPromptParam,
+    EvaluatorPromptTemplate,
+)
 from utils.retry_utils import retry_with_exponential_backoff
 
 evlautor_output_schema = {
@@ -33,9 +35,17 @@ class EvaluatorOutput(BaseModel):
 
 
 class EvaluatorAgent(Agent):
-    def __init__(self, model: BaseChatModel, criteria: EvaluationCriteria):
+    def __init__(
+        self,
+        model: BaseChatModel,
+        criteria: EvaluationCriteria,
+        persona_name: str,
+        character_name: str,
+    ):
         super().__init__(model)
         self.criteria = criteria
+        self.persona_name = persona_name
+        self.character_name = character_name
 
     @retry_with_exponential_backoff(max_retries=5, initial_delay=1.0, max_delay=10.0)
     def __call__(self, messages: List[BaseMessage]) -> dict:
@@ -52,17 +62,20 @@ class EvaluatorAgent(Agent):
     # TODO: 수정
     def get_character_name(self, message: BaseMessage) -> str:
         if message.type == "ai":
-            return "이진호"
+            return self.character_name
         else:
-            return "서하은"
+            return self.persona_name
 
     def make_prompt(self, messages: List[BaseMessage]) -> ChatPromptTemplate:
-
         message_contents = [
             f"{self.get_character_name(msg)}: {msg.content}" for msg in messages
         ]
 
-        return PromptTemplate().render_evaluator_prompt(message_contents, self.criteria)
+        return EvaluatorPromptTemplate().render(
+            EvaluatorPromptParam(
+                messages=message_contents, criteria=self.criteria
+            ).__dict__
+        )
 
     def calculate_score(self, evaluation_result: EvaluationResult) -> float:
         total_score = 0

@@ -10,7 +10,14 @@ class Character(Protocol):
     story_background: str
 
 
-class CompanionCharacter(Character):
+class Persona(Protocol):
+    name: str
+    character_archetype: str
+    description: str
+    story_background: str
+
+
+class Character(Character):
     initial_message: str
 
 
