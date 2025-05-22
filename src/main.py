@@ -59,14 +59,29 @@ def add_nodes_to_graph(
     final_evaluator_model,
     persona_data,
     companion_data,
+    turn_limit,
 ):
-    companion_node = CompanionAgent(model=companion_model, character=companion_data)
-    persona_node = PersonaAgent(model=persona_model, character=persona_data)
+    companion_node = CompanionAgent(
+        model=companion_model, character=companion_data, persona=persona_data
+    )
+    persona_node = PersonaAgent(
+        model=persona_model, character=companion_data, persona=persona_data
+    )
     evaluator_node = TurnEvaluatorAgent(
-        model=evaluator_model, criteria=persona_data["evaluation_criterias"]
+        model=evaluator_model,
+        criteria=persona_data["evaluation_criterias"],
+        persona_name=persona_data["name"],
+        character_name=companion_data["name"],
+        turn_limit=turn_limit,
+        companion_model=companion_model,
     )
     final_evaluator_node = FinalEvaluatorAgent(
-        model=final_evaluator_model, criteria=persona_data["evaluation_criterias"]
+        model=final_evaluator_model,
+        criteria=persona_data["evaluation_criterias"],
+        persona_name=persona_data["name"],
+        character_name=companion_data["name"],
+        turn_limit=turn_limit,
+        companion_model=companion_model,
     )
 
     workflow = StateGraph(ChatState)
@@ -128,7 +143,9 @@ if __name__ == "__main__":
 
     pipe(
         initialize_agents(args.model),
-        lambda models: add_nodes_to_graph(*models, persona_data, companion_data),
+        lambda models: add_nodes_to_graph(
+            *models, persona_data, companion_data, turn_limit
+        ),
         lambda workflow: add_edges_to_graph(workflow, turn_limit),
         lambda workflow: start_simulation(workflow, companion_data),
     )
