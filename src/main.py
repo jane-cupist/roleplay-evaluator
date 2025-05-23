@@ -125,7 +125,7 @@ def start_simulation(workflow, companion_data):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--persona-index", type=int)
-    parser.add_argument("--companion_index", type=int)
+    parser.add_argument("--companion-index", type=int)
     parser.add_argument("--model", type=str)
     parser.add_argument("--limit", type=int)
     args = parser.parse_args()
