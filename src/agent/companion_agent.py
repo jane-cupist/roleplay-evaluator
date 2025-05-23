@@ -24,7 +24,7 @@ class CompanionAgent(Agent):
         messages = state["messages"]
         last_message = messages[-1]
 
-        prompt = CompanionAgent.make_prompt(self.character, self.persona)
+        prompt = self.make_prompt()
         chain = prompt | self.model
 
         message_contents = [f"{msg.content}" for msg in messages[:-1]]
@@ -39,19 +39,25 @@ class CompanionAgent(Agent):
 
         return {"messages": [AIMessage(content=response.content)]}
 
-    @staticmethod
-    def make_prompt(character: Character, persona: Persona) -> ChatPromptTemplate:
+    def make_prompt(self) -> ChatPromptTemplate:
         return ChatPromptTemplate.from_messages(
             [
                 (
                     "system",
                     CharacterPromptTemplate().render(
                         CharacterPromptParam(
-                            character=character, persona=persona
+                            character=self.character, persona=self.persona
                         ).__dict__
                     ),
                 ),
                 MessagesPlaceholder(variable_name="messages"),
                 ("human", "{input}"),
+                ("ai", self.make_force_comply_message()),
             ]
         )
+
+    def make_force_comply_message(self) -> str:
+        return f"""
+Understood, I will simulate what happened next around {self.persona['name']}, within the <lore> and following all <rules>. In particular, I remember that writing {self.persona['name']}'s words or actions is off-limits; I'll stop immediately when it's {self.persona['name']}'s turn to act.
+To maintain variety, my plan is to write up to 140 words this time.
+My response:"""

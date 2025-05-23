@@ -60,6 +60,7 @@ def add_nodes_to_graph(
     persona_data,
     companion_data,
     turn_limit,
+    repeat_count,
 ):
     companion_node = CompanionAgent(
         model=companion_model, character=companion_data, persona=persona_data
@@ -74,6 +75,7 @@ def add_nodes_to_graph(
         character_name=companion_data["name"],
         turn_limit=turn_limit,
         companion_model=companion_model,
+        repeat_count=repeat_count,
     )
     final_evaluator_node = FinalEvaluatorAgent(
         model=final_evaluator_model,
@@ -82,6 +84,7 @@ def add_nodes_to_graph(
         character_name=companion_data["name"],
         turn_limit=turn_limit,
         companion_model=companion_model,
+        repeat_count=repeat_count,
     )
 
     workflow = StateGraph(ChatState)
@@ -128,6 +131,7 @@ if __name__ == "__main__":
     parser.add_argument("--companion-index", type=int)
     parser.add_argument("--model", type=str)
     parser.add_argument("--limit", type=int)
+    parser.add_argument("--repeat", type=int)
     args = parser.parse_args()
 
     print(f"[model: {args.model}, limit: {args.limit}] START / {datetime.now()}")
@@ -135,6 +139,7 @@ if __name__ == "__main__":
     persona_index = args.persona_index or 0
     companion_index = args.companion_index or 0
     turn_limit = args.limit or 1
+    repeat_count = args.repeat or 1
 
     character_data = load_character_data("asset/characters.yaml")
 
@@ -144,7 +149,7 @@ if __name__ == "__main__":
     pipe(
         initialize_agents(args.model),
         lambda models: add_nodes_to_graph(
-            *models, persona_data, companion_data, turn_limit
+            *models, persona_data, companion_data, turn_limit, repeat_count
         ),
         lambda workflow: add_edges_to_graph(workflow, turn_limit),
         lambda workflow: start_simulation(workflow, companion_data),
