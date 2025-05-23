@@ -18,7 +18,7 @@ def get_model_name(model) -> str:
 def get_log_file_name(name: str) -> str:
     parser = argparse.ArgumentParser()
     parser.add_argument("--persona-index", type=int)
-    parser.add_argument("--companion_index", type=int)
+    parser.add_argument("--companion-index", type=int)
     parser.add_argument("--model", type=str)
     parser.add_argument("--limit", type=int)
     args = parser.parse_args()
