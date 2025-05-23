@@ -1,3 +1,17 @@
+### 실행 방법
+```sh
+poetry run python src/main.py --model ge --limit 2 --persona-index 1 --companion-index 1
+```
+
+- model
+  - `gp`: gpt-4o
+  - `cl`: claude-3-7-sonnet-20250219
+  - `ge`: gemini-2.0-flash-001
+  - `ll`: meta-llama/llama-3.1-70b-instruct
+- limit: turn 수
+- persona-index: asset/characters.yaml에서 테스트할 페르소나 index
+- companion-index: asset/characters.yaml에서 테스트할 캐릭터 index
+
 ### 폴더 구조
 ```
 companion-evaluator
