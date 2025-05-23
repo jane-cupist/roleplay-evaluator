@@ -1,9 +1,103 @@
 #!/bin/bash
 
-# 실행 로그 출력
-# ./run_models.sh
-echo "Running model: cl"
-poetry run python src/main.py --model cl --limit 100
+poetry run python src/main.py --model ge --limit 100 --companion-index 1
+poetry run python src/main.py --model ge --limit 100 --companion-index 1
+poetry run python src/main.py --model ge --limit 100 --companion-index 1
+poetry run python src/main.py --model ge --limit 100 --companion-index 1
+poetry run python src/main.py --model ge --limit 100 --companion-index 1
+poetry run python src/main.py --model ge --limit 100 --companion-index 2
+poetry run python src/main.py --model ge --limit 100 --companion-index 2
+poetry run python src/main.py --model ge --limit 100 --companion-index 2
+poetry run python src/main.py --model ge --limit 100 --companion-index 2
+poetry run python src/main.py --model ge --limit 100 --companion-index 2
+poetry run python src/main.py --model ge --limit 100 --companion-index 3
+poetry run python src/main.py --model ge --limit 100 --companion-index 3
+poetry run python src/main.py --model ge --limit 100 --companion-index 3
+poetry run python src/main.py --model ge --limit 100 --companion-index 3
+poetry run python src/main.py --model ge --limit 100 --companion-index 3
+poetry run python src/main.py --model ge --limit 100 --companion-index 4
+poetry run python src/main.py --model ge --limit 100 --companion-index 4
+poetry run python src/main.py --model ge --limit 100 --companion-index 4
+poetry run python src/main.py --model ge --limit 100 --companion-index 4
+poetry run python src/main.py --model ge --limit 100 --companion-index 4
+poetry run python src/main.py --model ge --limit 100 --companion-index 5
+poetry run python src/main.py --model ge --limit 100 --companion-index 5
+poetry run python src/main.py --model ge --limit 100 --companion-index 5
+poetry run python src/main.py --model ge --limit 100 --companion-index 5
+poetry run python src/main.py --model ge --limit 100 --companion-index 5
+poetry run python src/main.py --model ge --limit 100 --companion-index 6
+poetry run python src/main.py --model ge --limit 100 --companion-index 6
+poetry run python src/main.py --model ge --limit 100 --companion-index 6
+poetry run python src/main.py --model ge --limit 100 --companion-index 6
+poetry run python src/main.py --model ge --limit 100 --companion-index 6
+poetry run python src/main.py --model ge --limit 100 --companion-index 7
+poetry run python src/main.py --model ge --limit 100 --companion-index 7
+poetry run python src/main.py --model ge --limit 100 --companion-index 7
+poetry run python src/main.py --model ge --limit 100 --companion-index 7
+poetry run python src/main.py --model ge --limit 100 --companion-index 7
+poetry run python src/main.py --model ge --limit 100 --companion-index 8
+poetry run python src/main.py --model ge --limit 100 --companion-index 8
+poetry run python src/main.py --model ge --limit 100 --companion-index 8
+poetry run python src/main.py --model ge --limit 100 --companion-index 8
+poetry run python src/main.py --model ge --limit 100 --companion-index 8
+poetry run python src/main.py --model ge --limit 100 --companion-index 9
+poetry run python src/main.py --model ge --limit 100 --companion-index 9
+poetry run python src/main.py --model ge --limit 100 --companion-index 9
+poetry run python src/main.py --model ge --limit 100 --companion-index 9
+poetry run python src/main.py --model ge --limit 100 --companion-index 9
+poetry run python src/main.py --model ge --limit 100 --companion-index 10
+poetry run python src/main.py --model ge --limit 100 --companion-index 10
+poetry run python src/main.py --model ge --limit 100 --companion-index 10
+poetry run python src/main.py --model ge --limit 100 --companion-index 10
+poetry run python src/main.py --model ge --limit 100 --companion-index 10
 
-echo "Running model: ge"
-poetry run python src/main.py --model ge --limit 100
+poetry run python src/main.py --model cl --limit 100 --companion-index 1
+poetry run python src/main.py --model cl --limit 100 --companion-index 1
+poetry run python src/main.py --model cl --limit 100 --companion-index 1
+poetry run python src/main.py --model cl --limit 100 --companion-index 1
+poetry run python src/main.py --model cl --limit 100 --companion-index 2
+poetry run python src/main.py --model cl --limit 100 --companion-index 2
+poetry run python src/main.py --model cl --limit 100 --companion-index 2
+poetry run python src/main.py --model cl --limit 100 --companion-index 2
+poetry run python src/main.py --model cl --limit 100 --companion-index 2
+poetry run python src/main.py --model cl --limit 100 --companion-index 3
+poetry run python src/main.py --model cl --limit 100 --companion-index 3
+poetry run python src/main.py --model cl --limit 100 --companion-index 3
+poetry run python src/main.py --model cl --limit 100 --companion-index 3
+poetry run python src/main.py --model cl --limit 100 --companion-index 3
+poetry run python src/main.py --model cl --limit 100 --companion-index 4
+poetry run python src/main.py --model cl --limit 100 --companion-index 4
+poetry run python src/main.py --model cl --limit 100 --companion-index 4
+poetry run python src/main.py --model cl --limit 100 --companion-index 4
+poetry run python src/main.py --model cl --limit 100 --companion-index 4
+poetry run python src/main.py --model cl --limit 100 --companion-index 5
+poetry run python src/main.py --model cl --limit 100 --companion-index 5
+poetry run python src/main.py --model cl --limit 100 --companion-index 5
+poetry run python src/main.py --model cl --limit 100 --companion-index 5
+poetry run python src/main.py --model cl --limit 100 --companion-index 5
+poetry run python src/main.py --model cl --limit 100 --companion-index 6
+poetry run python src/main.py --model cl --limit 100 --companion-index 6
+poetry run python src/main.py --model cl --limit 100 --companion-index 6
+poetry run python src/main.py --model cl --limit 100 --companion-index 6
+poetry run python src/main.py --model cl --limit 100 --companion-index 6
+poetry run python src/main.py --model cl --limit 100 --companion-index 7
+poetry run python src/main.py --model cl --limit 100 --companion-index 7
+poetry run python src/main.py --model cl --limit 100 --companion-index 7
+poetry run python src/main.py --model cl --limit 100 --companion-index 7
+poetry run python src/main.py --model cl --limit 100 --companion-index 7
+poetry run python src/main.py --model cl --limit 100 --companion-index 8
+poetry run python src/main.py --model cl --limit 100 --companion-index 8
+poetry run python src/main.py --model cl --limit 100 --companion-index 8
+poetry run python src/main.py --model cl --limit 100 --companion-index 8
+poetry run python src/main.py --model cl --limit 100 --companion-index 8
+poetry run python src/main.py --model cl --limit 100 --companion-index 9
+poetry run python src/main.py --model cl --limit 100 --companion-index 9
+poetry run python src/main.py --model cl --limit 100 --companion-index 9
+poetry run python src/main.py --model cl --limit 100 --companion-index 9
+poetry run python src/main.py --model cl --limit 100 --companion-index 9
+poetry run python src/main.py --model cl --limit 100 --companion-index 10
+poetry run python src/main.py --model cl --limit 100 --companion-index 10
+poetry run python src/main.py --model cl --limit 100 --companion-index 10
+poetry run python src/main.py --model cl --limit 100 --companion-index 10
+poetry run python src/main.py --model cl --limit 100 --companion-index 10
+

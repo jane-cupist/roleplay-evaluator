@@ -19,11 +19,13 @@ class TurnEvaluatorAgent(EvaluatorAgent):
         character_name: str,
         turn_limit: int,
         companion_model: BaseChatModel,
+        repeat_count: int,
     ):
         super().__init__(model, criteria, persona_name, character_name)
         self.output_dir = "output"
         self.model_name = companion_model.__class__.__name__
         self.turn_limit = turn_limit
+        self.repeat_count = repeat_count
         os.makedirs(self.output_dir, exist_ok=True)
 
     def _write_turn_evaluation_rows(self, writer: csv.writer, result: dict) -> None:
@@ -62,7 +64,7 @@ class TurnEvaluatorAgent(EvaluatorAgent):
         save_evaluation_to_csv(
             result=result,
             output_dir=self.output_dir,
-            filename_prefix=f"{self.model_name}_{self.turn_limit}turn_evaluation_result",
+            filename_prefix=f"{self.model_name}_turn{self.turn_limit}_{self.character_name}_repeat{self.repeat_count}_evaluation_result",
             headers=["Turn", "Criteria", "Score", "Description"],
             row_writer=self._write_turn_evaluation_rows,
         )

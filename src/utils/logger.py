@@ -21,9 +21,10 @@ def get_log_file_name(name: str) -> str:
     parser.add_argument("--companion-index", type=int)
     parser.add_argument("--model", type=str)
     parser.add_argument("--limit", type=int)
+    parser.add_argument("--repeat", type=int)
     args = parser.parse_args()
 
-    return f'logs/{name}_{get_model_name(args.model)}_{args.limit}turn_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
+    return f'logs/{name}_{get_model_name(args.model)}_turn{args.limit}_char{args.companion_index}_repeat{args.repeat}_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
 
 
 def setup_logger(name: str) -> logging.Logger:
